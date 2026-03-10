@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout">
+
+<head th:fragment="header"></head>
+
+<body>
+
+    <div th:fragment="content">
+        <div class="card shadow-sm">
+            <div class="card-header d-flex justify-content-between">
+                <h5>👤 Data Anggota</h5>
+                <a th:href="@{/anggota/modal/tambah}" data-modal="true" class="btn btn-primary btn-sm">+ Tambah
+                    Anggota</a>
+            </div>
+
+            <table class="table table-hover m-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>Nama</th>
+                        <th>Nomor Anggota</th>
+                        <th width="150">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="a : ${listAnggota}">
+                        <td th:text="${a.nama}"></td>
+                        <td th:text="${a.nomorAnggota}"></td>
+                        <td>
+                            <a th:href="@{/anggota/modal/edit/{id}(id=${a.id})}"
+                                th:attr="href=@{/anggota/modal/edit/{id}(id=${a.id})}" data-modal="true"
+                                class="btn btn-warning btn-sm">Edit</a>
+                            <a th:href="@{/anggota/hapus/{id}(id=${a.id})}" class="btn btn-danger btn-sm"
+                                onclick="return confirm('Hapus anggota?')">
+                                Hapus
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+
+</html>

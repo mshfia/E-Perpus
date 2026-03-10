@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout">
+
+<head th:fragment="header"></head>
+
+<body>
+
+    <div th:fragment="content">
+        <div class="card shadow-sm">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5>🔁 Data Peminjaman</h5>
+                <a th:href="@{/peminjaman/modal/tambah}" data-modal="true" class="btn btn-primary btn-sm">+ Tambah
+                    Peminjaman</a>
+            </div>
+
+            <table class="table table-hover">
+                <thead class="table-light">
+                    <tr>
+                        <th>Anggota</th>
+                        <th>Buku</th>
+                        <th>Tanggal Pinjam</th>
+                        <th>Tanggal Kembali</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="p : ${listPeminjaman}">
+                        <td th:text="${p.anggota.nama}"></td>
+                        <td th:text="${p.buku.judul}"></td>
+                        <td th:text="${p.tanggalPinjam}"></td>
+                        <td th:text="${p.tanggalKembali != null ? p.tanggalKembali : '-'}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+
+</html>

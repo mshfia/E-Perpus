@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout">
+
+<head th:fragment="header"></head>
+
+<body>
+
+    <div th:fragment="content">
+        <div class="card shadow-sm">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">📘 Data Buku</h5>
+                <a th:href="@{/buku/modal/tambah}" data-modal="true" class="btn btn-primary btn-sm">+ Tambah Buku</a>
+            </div>
+
+            <div class="card-body">
+                <table class="table table-hover align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Judul</th>
+                            <th>Pengarang</th>
+                            <th>Genre</th>
+                            <th>Status</th>
+                            <th width="150">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="b : ${listBuku}">
+                            <td th:text="${b.judul}"></td>
+                            <td th:text="${b.pengarang}"></td>
+                            <td th:text="${b.genre}"></td>
+                            <td>
+                                <span class="badge" th:classappend="${b.tersedia} ? 'bg-success' : 'bg-danger'"
+                                    th:text="${b.tersedia} ? 'Tersedia' : 'Dipinjam'">
+                                </span>
+                            </td>
+                            <td>
+                                <a th:href="@{/buku/modal/edit/{id}(id=${b.id})}"
+                                    th:attr="href=@{/buku/modal/edit/{id}(id=${b.id})}" data-modal="true"
+                                    class="btn btn-warning btn-sm">Edit</a>
+                                <a th:href="@{/buku/hapus/{id}(id=${b.id})}" class="btn btn-danger btn-sm"
+                                    onclick="return confirm('Yakin hapus buku ini?')">
+                                    Hapus
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
